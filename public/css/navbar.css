@@ -1,0 +1,22 @@
+.custom-navbar{
+    background-color: #515673;
+    width: 127px;
+    height: 90%;
+    border-radius: 35px;
+    position: fixed;
+    left: 10px;
+    top: 35px;
+}
+
+.weather-icon > *{
+    background-color: #000525;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+@media only screen and (max-width: 767px) {
+    .row .my-navbar {
+        display: none !important;
+    }
+}
+

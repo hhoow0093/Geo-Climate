@@ -1,0 +1,30 @@
+.loader-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.5s ease-in;
+  overflow: hidden;
+}
+
+.loader-wrapper.hidden{
+    opacity: 0;
+}
+
+.loader-layer {
+  flex-grow: 1;
+  height: 100%;
+}
+
+.loader-layer:nth-child(1) {
+  background-color: #000525;
+}
+.loader-layer:nth-child(2) {
+  background-color: #101f80;
+}
+.loader-layer:nth-child(3) {
+  background-color: #3342a0;
+}

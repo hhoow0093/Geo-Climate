@@ -1,0 +1,19 @@
+<link rel="stylesheet" href="/css/loader.css" />
+<div class="loader-wrapper">
+  <div class="loader-layer"></div>
+  <div class="loader-layer"></div>
+  <div class="loader-layer"></div>
+</div>
+
+<script>
+  const animateLoader = () => {
+    const wrapper = document.querySelector(".loader-wrapper");
+    wrapper.classList.add("hidden");
+  };
+
+  if (document.readyState === "complete") {
+    animateLoader();
+  } else {
+    window.addEventListener("load", animateLoader);
+  }
+</script>

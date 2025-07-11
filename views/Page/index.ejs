@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Web App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+    <%- include('../Template/loader.ejs') %>
+
+    <section class="main-page">
+        <div class="container-fluid">
+            <div class="row MY-APP">
+                <div class="my-navbar col-0 col-md-2 col-xxl-1 d-flex justify-content-center align-items-center">
+                    <%- include('../Template/navbar.ejs') %>
+                </div>
+                <div class="col-12 col-md-10 col-xxl-11 my-info">
+                    <form action="/check-weather" method="post">
+                        <div class="container-fluid mt-5 d-flex flex-column-reverse flex-md-row gap-2">
+                            <div class="input-container">
+                                <input type="text" name="city" id="city" class="custom-search" placeholder="Search for cities..." autocomplete="off">
+                                <input type="hidden" name="longitude" id="longitude">
+                                <input type="hidden" name="latitude" id="latitude">
+                                <div class="input-dropdown"></div>
+                            </div>
+                            <button type="submit" class="submit-button">Submit</button>
+                        </div>
+                    </form>
+                    <div class="display-weather-condition container-fluid">
+                        <div class="row">
+                            <div class="col-12 col-xxl-8 daily-forecast">
+                                <div class="row">
+                                    <div class="col-12 show-icon-container">
+                                        <div class="placeholder-container">
+                                        <div class="container header-container mt-5 pt-3">
+                                            <div class="text-content">
+                                                <div class="header">
+                                                    <h2 class="urbanist-header"><%= place[0] %></h2>
+                                                    <p class="urbanist-text">Humidity level <%= weatherInfo[0] %>%</p>
+                                                </div>
+                                                <div class="temperature">
+                                                    <h1 class="urbanist-header"><%=weatherInfo[1]%>°C</h1>
+                                                </div>
+                                            </div>
+                                            <div class="icon-content">
+                                                <img src="/Assets/SVG/<%= weatherInfo[2] %>.svg" alt="" width="300" height="300">
+                                            </div>
+                                        </div>
+                                            <div class="placeholder-space"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 hourly-space">
+                                    </div>
+                                    <div class="col-12 special-center">
+                                        <div class="hourly-forecast mb-4">
+                                            <h6 class="urbanist-sub-header">
+                                                Today's Forecast
+                                            </h6>
+                                            <div class="forecast-information-box container">
+                                                <% if (typeof hourlyForecast != "undefined" && hourlyForecast.length > 0) {%>
+                                                    <% hourlyForecast.forEach(function(item){%>
+                                                        <div class="box-container">
+                                                            <p style="text-align: center;" class="today-forecast-text"><%= item.temp %> °C</p>
+                                                            <img src="/Assets/SVG/<%= item.weather %>.svg" alt="" width="100" height="100" class="icon-daily-forecast">
+                                                            <p style="text-align: center;" class="today-forecast-text"><%= item.date.slice(11, 16) %></p>
+                                                        </div>
+                                                    <% }) %>
+                                                <% } %>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-xxl-4 weekly-forecast">
+                                <div class="container-fluid container-weekly-forecast special-center" style="flex-direction: column;">
+                                    <h6 class="urbanist-sub-header">
+                                        Weekly Forecast
+                                    </h6>
+                                    <div class="row mt-4">
+                                        <div class="col-12 card-weather">
+                                            <% if (typeof weeklyForecast != "undefined" && weeklyForecast.length > 0) { %>
+                                                <% weeklyForecast.forEach(function(item){ %>
+                                                    <div class="container d-flex justify-content-between align-items-center mt-4 pt-1" style="border-bottom: 1px solid white;">
+                                                        <p class="today-forecast-text" style="padding-top: 8px;"><%= item.hari %></p>
+                                                        <div class="box-for-icon d-flex gap-2">
+                                                            <img src="/Assets/SVG/<%= item.weather %>.svg" alt="" width="50" height="50" class="icon-daily-forecast">
+                                                            <p class="today-forecast-text" style="padding-top: 8px;"><%= item.weather %></p>
+                                                        </div>
+                                                        <p class="today-forecast-text" style="padding-top: 8px;"><%= item.temp %> °C</p>
+                                                    </div>
+                                                <%})  %>
+                                            <% } %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/Js/index.js" type="module"></script>
+</body>
+</html>
